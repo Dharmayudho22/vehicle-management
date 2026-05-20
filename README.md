@@ -57,7 +57,7 @@ The system supports:
 ### Dashboard
 
 <p align="center">
-  <img src="docs/dashboard.png" width="1000">
+  <img src="docs/Tampilan Dashboard.png" width="1000">
 </p>
 
 ---
@@ -69,7 +69,7 @@ The system supports:
 The following diagram illustrates the complete operational flow from vehicle reservation creation, approval process, trip execution, and completion.
 
 <p align="center">
-  <img src="docs/activity-diagram.png" width="900">
+  <img src="docs/Activity Diagram.png" width="900">
 </p>
 
 ---
@@ -79,7 +79,7 @@ The following diagram illustrates the complete operational flow from vehicle res
 The following ERD illustrates the database structure and relationships between entities.
 
 <p align="center">
-  <img src="docs/erd.png" width="1100">
+  <img src="docs/ERD.png" width="1100">
 </p>
 
 ---
