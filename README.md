@@ -140,7 +140,7 @@ Node.js >= 18.x (Optional)
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-username/vehicle-management.git
+git clone https://github.com/Dharmayudho22/vehicle-management.git
 cd vehicle-management
 ```
 
