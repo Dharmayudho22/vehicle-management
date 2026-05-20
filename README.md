@@ -1,59 +1,227 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Vehicle Management System
+
+A web-based vehicle reservation management system for mining company operational transportation with **multi-level approval workflow**, **dashboard analytics**, **Excel reporting**, and **activity logging**.
+
+---
+
+## Overview
+
+This application was developed to simplify operational vehicle reservation management in a mining company environment.
+
+The system supports:
+
+- Vehicle booking management
+- Multi-level approval (Level 1 & Level 2)
+- Booking conflict detection
+- Driver & vehicle management
+- Dashboard analytics
+- Fuel & service logs
+- Export reports to Excel
+- Activity logging for auditing purposes
+
+---
+
+## Key Features
+
+### Vehicle Booking
+- Create operational vehicle reservations
+- Assign drivers and vehicles
+- Conflict detection to prevent double booking
+- Trip lifecycle management
+
+### Multi-Level Approval
+- Approval Level 1 (Section Head)
+- Approval Level 2 (Department Head)
+- Cascading rejection mechanism
+
+### Dashboard Analytics
+- Vehicle usage statistics
+- Booking trends
+- Booking status distribution
+- Latest reservations overview
+
+### Reports & Export
+- Date-based filtering
+- Booking status filtering
+- Excel export (`.xlsx`)
+
+### Activity Logging
+- System records user activity
+- Approval actions logging
+- Export and booking history
+
+---
+
+## Application Preview
+
+### Dashboard
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="docs/dashboard.png" width="1000">
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## System Design
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Activity Diagram
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The following diagram illustrates the complete operational flow from vehicle reservation creation, approval process, trip execution, and completion.
 
-## Learning Laravel
+<p align="center">
+  <img src="docs/activity-diagram.png" width="900">
+</p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Entity Relationship Diagram (ERD)
 
-## Laravel Sponsors
+The following ERD illustrates the database structure and relationships between entities.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<p align="center">
+  <img src="docs/erd.png" width="1100">
+</p>
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Business Process
 
-## Contributing
+1. Admin creates a vehicle reservation.
+2. The system validates booking conflicts.
+3. Approver Level 1 reviews the request.
+4. If approved, the request proceeds to Approver Level 2.
+5. After final approval, the vehicle becomes ready for use.
+6. Admin records trip information, odometer, and fuel usage.
+7. The system stores logs and updates trip status.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Tech Stack
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Component | Technology |
+|------------|-------------|
+| **Backend** | Laravel 11 |
+| **Language** | PHP 8.3 |
+| **Database** | MySQL 8 |
+| **Frontend** | Blade |
+| **UI Framework** | Tailwind CSS |
+| **JavaScript** | Alpine.js |
+| **Charts** | ApexCharts |
+| **Export** | Laravel Excel |
+| **Authentication** | Laravel Breeze |
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Demo Account
 
-## License
+| Role | Email | Password |
+|------|--------|----------|
+| Admin | admin@nikel.co.id | `password` |
+| Approver Level 1 | approver1@nikel.co.id | `password` |
+| Approver Level 2 | approver2@nikel.co.id | `password` |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> For demonstration/testing purposes only.
+
+---
+
+## System Requirements
+
+```bash
+PHP >= 8.2
+Composer >= 2.x
+MySQL >= 8.0
+Node.js >= 18.x (Optional)
+```
+
+---
+
+## Installation
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/your-username/vehicle-management.git
+cd vehicle-management
+```
+
+### 2. Install Dependencies
+
+```bash
+composer install
+```
+
+### 3. Setup Environment
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Configure Database
+
+Edit `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=vehicle_management
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Run Migration & Seeder
+
+```bash
+php artisan migrate --seed
+```
+
+### 6. Start Development Server
+
+```bash
+php artisan serve
+```
+
+Open in browser:
+
+```txt
+http://localhost:8000
+```
+
+---
+
+## Database Structure
+
+| Table | Description |
+|--------|-------------|
+| `users` | User data & roles |
+| `vehicles` | Vehicle information |
+| `drivers` | Driver information |
+| `bookings` | Vehicle reservations |
+| `approvals` | Multi-level approvals |
+| `fuel_logs` | Fuel consumption logs |
+| `service_logs` | Vehicle maintenance logs |
+| `app_logs` | Activity audit logs |
+
+---
+
+## Technical Highlights
+
+- **Conflict Detection** — prevents overlapping vehicle booking.
+- **Role-Based Access Control** — Admin & Approver permissions.
+- **Multi-Level Approval Workflow** — sequential approval process.
+- **Cascading Rejection** — automatic rejection propagation.
+- **Responsive UI** — mobile-friendly interface.
+- **Activity Logging** — audit trail for every major action.
+
+---
+
+## Author
+
+**Sudarma Yudho Prayitno**  
+Informatics Graduate | Fullstack Developer Enthusiast
+
+GitHub: `github.com/Dharmayudho22`  
+LinkedIn: `www.linkedin.com/in/sudarma-yudho-prayitno`
+
+---
