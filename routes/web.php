@@ -32,10 +32,6 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('bookings', BookingController::class);
         Route::post('bookings/{booking}/complete', [BookingController::class, 'complete'])
             ->name('bookings.complete');
-
-        // Laporan
-        Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
-        Route::get('reports/export', [ReportController::class, 'export'])->name('reports.export');
     });
 
     // ── Admin & Manager bisa approve ───────────────────
@@ -52,5 +48,11 @@ Route::middleware(['auth'])->group(function () {
             ->name('logs.index');
         Route::post('switch-account/{user}', [App\Http\Controllers\SwitchAccountController::class, 'switch'])
             ->name('switch.account');
+
+        // Laporan
+        Route::get('reports', [ReportController::class, 'index'])
+            ->name('reports.index');
+        Route::get('reports/export', [ReportController::class, 'export'])
+            ->name('reports.export');
     });
 });

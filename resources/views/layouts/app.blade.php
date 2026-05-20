@@ -26,76 +26,103 @@
 
         {{-- Nav --}}
         <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+
+            {{-- Dashboard --}}
             <a href="{{ route('dashboard') }}"
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
-                      {{ request()->routeIs('dashboard') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
+                    {{ request()->routeIs('dashboard') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
                 </svg>
                 Dashboard
             </a>
 
+            {{-- PEMESANAN (ADMIN ONLY) --}}
             @if(auth()->user()->isAdmin())
             <a href="{{ route('bookings.index') }}"
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
-                      {{ request()->routeIs('bookings.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
+                    {{ request()->routeIs('bookings.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
                 Pemesanan
             </a>
             @endif
 
+            {{-- APPROVAL (MANAGER / APPROVER ONLY) --}}
             @if(auth()->user()->isApprover())
             <a href="{{ route('approvals.index') }}"
-               class="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition
-                      {{ request()->routeIs('approvals.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
+            class="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition
+                    {{ request()->routeIs('approvals.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
+                
                 <span class="flex items-center gap-3">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    Persetujuan Perpinda...
+                    Persetujuan Perpindahan
                 </span>
-                @php $pending = auth()->user()->pendingApprovals()->count() @endphp
+
+                @php
+                    $pending = auth()->user()->pendingApprovals()->count();
+                @endphp
+
                 @if($pending > 0)
-                <span class="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{{ $pending }}</span>
+                <span class="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {{ $pending }}
+                </span>
                 @endif
             </a>
             @endif
 
+            {{-- ADMIN ONLY --}}
             @if(auth()->user()->isAdmin())
+
             <a href="{{ route('vehicles.index') }}"
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
-                      {{ request()->routeIs('vehicles.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
+                    {{ request()->routeIs('vehicles.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
                 </svg>
                 Manajemen Kendaraan
             </a>
 
             <a href="{{ route('drivers.index') }}"
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
-                      {{ request()->routeIs('drivers.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
+                    {{ request()->routeIs('drivers.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
                 Manajemen Driver
             </a>
 
+            @endif
+
+            {{-- LAPORAN (ADMIN + MANAGER) --}}
+            @if(auth()->user()->isAdmin() || auth()->user()->isApprover())
             <a href="{{ route('reports.index') }}"
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
-                      {{ request()->routeIs('reports.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
+                    {{ request()->routeIs('reports.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                 </svg>
                 Laporan & Export
             </a>
+            @endif
 
+            {{-- LOG AKTIVITAS (ADMIN + MANAGER) --}}
+            @if(auth()->user()->isAdmin() || auth()->user()->isApprover())
             <a href="{{ route('logs.index') }}"
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
-                      {{ request()->routeIs('logs.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
+                    {{ request()->routeIs('logs.*') ? 'bg-yellow-500 text-gray-900' : 'text-gray-300 hover:bg-gray-700' }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 Log Aktivitas
             </a>
