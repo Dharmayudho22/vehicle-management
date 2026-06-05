@@ -36,12 +36,7 @@ return new class extends Migration
             $table->text('purpose');
             $table->integer('passenger_count');
 
-            $table->enum('status', [
-                'pending',
-                'approved',
-                'rejected',
-                'completed'
-            ])->default('pending');
+            $table->string('status')->default('pending');
             
             $table->timestamps();
         });

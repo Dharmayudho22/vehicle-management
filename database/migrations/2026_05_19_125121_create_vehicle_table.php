@@ -17,17 +17,9 @@ return new class extends Migration
             $table->string('brand');
             $table->string('model');
             $table->string('type');
-            $table->enum('ownership', [
-                'owned',
-                'leased',
-                'rental'
-            ]);
-
-            $table->enum('status', [
-                'available',
-                'in_use',
-                'maintenance',
-            ])->default('available');
+            
+            $table->string('ownership')->default('owned');
+            $table->string('status')->default('available');
 
             $table->decimal('fuel_consumption', 8, 2)
                 ->nullable();

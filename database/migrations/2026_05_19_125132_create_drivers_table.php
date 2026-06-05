@@ -21,10 +21,7 @@ return new class extends Migration
             $table->string('license_number')->unique();
             $table->string('license_type');
 
-            $table->enum('status', [
-                'active',
-                'inactive'
-            ])->default('active');
+            $table->string('status')->default('active');
 
             $table->timestamps();
         });

@@ -23,11 +23,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->integer('level');
-            $table->enum('status', [
-                'pending',
-                'approved',
-                'rejected'
-            ])->default('pending');
+            $table->string('status')->default('pending');
 
             $table->text('notes')->nullable();
             $table->timestamp('approved_at')->nullable();
