@@ -14,13 +14,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        \App\Models\Approval::truncate();
-        \App\Models\Booking::truncate();
-        \App\Models\Driver::truncate();
-        \App\Models\Vehicle::truncate();
-        \App\Models\User::truncate();
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        // \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // \App\Models\Approval::truncate();
+        // \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        // Dengan ini (PostgreSQL compatible)
+        \Illuminate\Support\Facades\DB::statement('TRUNCATE TABLE approvals, bookings, drivers, vehicles, users RESTART IDENTITY CASCADE;');
 
         // ══════════════════════════════════════
         // USERS
