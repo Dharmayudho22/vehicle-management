@@ -1,0 +1,7 @@
+node_modules
+vendor
+.git
+.env
+*.log
+public/build
+.phpunit.result.cache
