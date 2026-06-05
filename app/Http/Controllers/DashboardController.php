@@ -28,26 +28,26 @@ class DashboardController extends Controller
             'drivers_active'  => Driver::where('status', 'active')->count(),
         ];
 
-        // Chart monthly
+        // Chart monthly — ganti YEAR/MONTH dengan EXTRACT
         $monthlyUsage = Booking::select(
-                DB::raw('YEAR(start_datetime) as year'),
-                DB::raw('MONTH(start_datetime) as month'),
+                DB::raw('EXTRACT(YEAR FROM start_datetime) as year'),
+                DB::raw('EXTRACT(MONTH FROM start_datetime) as month'),
                 DB::raw('COUNT(*) as total')
             )
             ->where('start_datetime', '>=', now()->subMonths(12))
-            ->groupBy('year', 'month')
+            ->groupBy(DB::raw('EXTRACT(YEAR FROM start_datetime)'), DB::raw('EXTRACT(MONTH FROM start_datetime)'))
             ->orderBy('year')->orderBy('month')
             ->get()
             ->map(fn($row) => [
-                'label' => Carbon::create($row->year, $row->month)->format('M Y'),
+                'label' => Carbon::create((int)$row->year, (int)$row->month)->format('M Y'),
                 'total' => $row->total,
             ]);
 
-        // Chart per kendaraan
+        // Chart per kendaraan — ganti whereMonth
         $vehicleUsage = Booking::select('vehicles.plate_number', DB::raw('COUNT(*) as total'))
             ->join('vehicles', 'bookings.vehicle_id', '=', 'vehicles.id')
             ->where('bookings.status', 'completed')
-            ->whereMonth('bookings.start_datetime', now()->month)
+            ->whereRaw('EXTRACT(MONTH FROM bookings.start_datetime) = ?', [now()->month])
             ->groupBy('vehicles.id', 'vehicles.plate_number')
             ->orderByDesc('total')
             ->get();
