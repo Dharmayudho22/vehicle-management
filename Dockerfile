@@ -44,4 +44,8 @@ RUN echo '<VirtualHost *:80>\n\
 
 EXPOSE 80
 
+RUN echo "display_errors = On" >> /usr/local/etc/php/php.ini \
+    && echo "error_reporting = E_ALL" >> /usr/local/etc/php/php.ini \
+    && echo "log_errors = On" >> /usr/local/etc/php/php.ini
+
 CMD ["sh", "-c", "php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && apache2-foreground"]
